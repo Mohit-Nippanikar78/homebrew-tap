@@ -9,16 +9,16 @@ cask "siftmac" do
 
   livecheck do
     url "https://siftmac.com/appcast.xml"
-    strategy :sparkle
+    strategy :sparkle, &:short_version
   end
 
   auto_updates true
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "SiftMac.app"
 
-  uninstall quit:      "com.siftmac.SiftMac",
-            launchctl: "com.siftmac.SiftMac.shelf"
+  uninstall launchctl: "com.siftmac.SiftMac.shelf",
+            quit:      "com.siftmac.SiftMac"
 
   zap trash: [
     "~/Library/Application Support/SiftMac",
